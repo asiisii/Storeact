@@ -2,7 +2,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import colors from 'colors'
 import connectDB from './config/db.js'
-import products from './data/products.js'
+// import products from './data/products.js'
+import productRoutes from './routes/productRoutes.js'
 
 dotenv.config()
 
@@ -14,18 +15,20 @@ app.get('/', (req, res) => {
 	res.send('API is running...')
 })
 
-//will give us the entire products
-app.get('/v1/products', (req, res) => {
-	// we could do res.json but its a json file so
-	res.json(products)
-})
+// //will give us the entire products
+// app.get('/v1/products', (req, res) => {
+// 	// we could do res.json but its a json file so
+// 	res.json(products)
+// })
 
-//this will give us the single product
-app.get('/v1/products/:id', (req, res) => {
-	// finds and returns products that matches the id
-	const product = products.find(product => product._id === req.params.id)
-	res.json(product)
-})
+// //this will give us the single product
+// app.get('/v1/products/:id', (req, res) => {
+// 	// finds and returns products that matches the id
+// 	const product = products.find(product => product._id === req.params.id)
+// 	res.json(product)
+// })
+
+app.use('/api/products', productRoutes)
 
 const PORT = process.env.PORT || 5000
 
